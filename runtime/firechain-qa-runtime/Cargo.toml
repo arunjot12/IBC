@@ -115,6 +115,7 @@ pallet-transaction-storage = { workspace = true }
 pallet-vesting = { workspace = true }
 pallet-esg = { workspace = true }
 pallet-reward={ workspace = true }
+pallet-ibc-utils = {workspace = true}
 pallet-ibc-router ={workspace = true}
 pallet-ibc = {workspace = true}
 # Frontier

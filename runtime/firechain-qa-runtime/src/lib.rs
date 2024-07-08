@@ -30,6 +30,7 @@ use frame_election_provider_support::{
 	bounds::ElectionBoundsBuilder, onchain, BalancingConfig, ElectionDataProvider,
 	SequentialPhragmen, VoteWeight,
 };
+use pallet_ibc_utils::module::DefaultRouter;
 use frame_support::{
 	construct_runtime,
 	dispatch::DispatchClass,
@@ -216,6 +217,7 @@ const MAXIMUM_BLOCK_WEIGHT: Weight =
 parameter_types! {
 	pub const BlockHashCount: BlockNumber = 2400;
 	pub const Version: RuntimeVersion = VERSION;
+	pub const ChainVersion: u64 = 0;
 	pub RuntimeBlockLength: BlockLength =
 		BlockLength::max_with_normal_ratio(5 * 1024 * 1024, NORMAL_DISPATCH_RATIO);
 	pub RuntimeBlockWeights: BlockWeights = BlockWeights::builder()
@@ -266,6 +268,17 @@ impl frame_system::Config for Runtime {
 	type OnSetCode = ();
 	type MaxConsumers = ConstU32<16>;
 }
+
+impl pallet_ibc::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type TimeProvider = pallet_timestamp::Pallet<Runtime>;
+	type ExpectedBlockTime = ExpectedBlockTime;
+	const IBC_COMMITMENT_PREFIX: &'static [u8] = b"Ibc";
+	type ChainVersion = ChainVersion;
+	type IbcModule = DefaultRouter;
+	type WeightInfo = ();
+}
+
 
 impl pallet_insecure_randomness_collective_flip::Config for Runtime {}
 
@@ -1739,6 +1752,7 @@ construct_runtime!(
 		Proxy: pallet_proxy,
 		Multisig: pallet_multisig,
 		Bounties: pallet_bounties,
+		Ibc:pallet_ibc,
 		Assets: pallet_assets::<Instance1>,
 		PoolAssets: pallet_assets::<Instance2>,
 		Mmr: pallet_mmr,

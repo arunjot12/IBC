@@ -169,6 +169,7 @@ pallet-root-testing = { version = "1.0.0-dev", git = "https://github.com/parityt
 
 # Pallet implementation
 pallet-ibc ={path="frame/core",default-features = false}
+pallet-ibc-utils ={path="frame/utils",default-features = false}
 pallet-ibc-router = {path="frame/ibc-router",default-features = false }
 pallet-ics20-transfer ={path="frame/transfer",default-features = false}
 pallet-esg = { version = "1.0.0", path = "frame/esg", default-features = false}

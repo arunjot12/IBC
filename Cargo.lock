@@ -2724,6 +2724,7 @@ dependencies = [
  "pallet-hotfix-sufficients",
  "pallet-ibc",
  "pallet-ibc-router",
+ "pallet-ibc-utils",
  "pallet-identity",
  "pallet-im-online 4.0.0-dev",
  "pallet-indices",
