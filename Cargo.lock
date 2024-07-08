@@ -2725,6 +2725,7 @@ dependencies = [
  "pallet-ibc",
  "pallet-ibc-router",
  "pallet-ibc-utils",
+ "pallet-ics20-transfer",
  "pallet-identity",
  "pallet-im-online 4.0.0-dev",
  "pallet-indices",
@@ -6492,6 +6493,7 @@ name = "pallet-ics20-transfer"
 version = "4.0.0-dev"
 dependencies = [
  "chrono",
+ "fp-account",
  "frame-benchmarking",
  "frame-support",
  "frame-system",

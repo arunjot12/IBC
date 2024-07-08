@@ -1544,6 +1544,19 @@ parameter_types! {
 	pub const AllianceMaxProposals: u32 = 100;
 	pub const AllianceMaxMembers: u32 = 100;
 }
+pub type AssetBalance = u128;
+pub type AssetId = u32;
+impl pallet_ics20_transfer::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Currency = Balances;
+	type AssetId = AssetId;
+	type AssetBalance = AssetBalance;
+	type Fungibles = Assets;
+	type AssetIdByName = Ics20Transfer;
+	type IbcContext = pallet_ibc::context::Context<Runtime>;
+	type AccountIdConversion = pallet_ics20_transfer::impls::IbcAccount;
+	const NATIVE_TOKEN_NAME: &'static [u8] = b"DEMO";
+}
 
 type AllianceCollective = pallet_collective::Instance3;
 impl pallet_collective::Config<AllianceCollective> for Runtime {
@@ -1753,6 +1766,7 @@ construct_runtime!(
 		Multisig: pallet_multisig,
 		Bounties: pallet_bounties,
 		Ibc:pallet_ibc,
+		Ics20Transfer: pallet_ics20_transfer::{Pallet,Event<T>},
 		Assets: pallet_assets::<Instance1>,
 		PoolAssets: pallet_assets::<Instance2>,
 		Mmr: pallet_mmr,

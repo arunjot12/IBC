@@ -118,6 +118,7 @@ pallet-reward={ workspace = true }
 pallet-ibc-utils = {workspace = true}
 pallet-ibc-router ={workspace = true}
 pallet-ibc = {workspace = true}
+pallet-ics20-transfer = {workspace = true}
 # Frontier
 fp-account = { workspace = true, features = ["serde"] }
 fp-evm = { workspace = true, features = ["serde"] }
@@ -171,6 +172,7 @@ std = [
 	"frame-executive/std",
 	"pallet-grandpa/std",
 	"pallet-im-online/std",
+	"pallet-ics20-transfer/std",
 	"pallet-indices/std",
 	"sp-inherents/std",
 	"pallet-membership/std",

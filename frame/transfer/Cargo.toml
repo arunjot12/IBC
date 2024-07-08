@@ -35,7 +35,7 @@ sp-io = {  default-features = false, git = "https://github.com/paritytech/polkad
 sp-runtime = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch = "release-polkadot-v1.1.0" }
 sp-std = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch = "release-polkadot-v1.1.0" }
 pallet-timestamp = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch = "release-polkadot-v1.1.0" }
-
+fp-account = { workspace = true,default-features = false}
 # ibc
 pallet-ibc-utils = { version = "0.1.0", default-features = false, path = "../utils" }
 ibc = { version = "0.28.0", default-features = false, features = [
@@ -76,6 +76,7 @@ std = [
     "pallet-ibc-utils/std",
     "log/std",
     "scale-info/std",
+    "fp-account/std",
     "sp-io/std",
     "sp-runtime/std",
     "sp-std/std",

@@ -20,7 +20,6 @@ use primitive_types::U256;
 use scale_info::TypeInfo;
 use sp_runtime::{
 	traits::{CheckedConversion, IdentifyAccount, Verify},
-	MultiSignature,
 };
 use sp_std::str::FromStr;
 
@@ -221,7 +220,7 @@ impl<T: Config> TokenTransferContext for IbcTransferModule<T> {
 }
 
 /// Alias to 512-bit hash when used in the context of a transaction signature on the chain.
-pub type Signature = MultiSignature;
+pub type Signature = fp_account::EthereumSignature;
 
 /// Some way of identifying an account on the chain. We intentionally make it equivalent
 /// to the public key of our transaction signing scheme.
@@ -239,7 +238,7 @@ impl IdentifyAccount for IbcAccount {
 
 impl TryFrom<Signer> for IbcAccount
 where
-	AccountId: From<[u8; 32]>,
+	AccountId: From<[u8; 20]>,
 {
 	type Error = &'static str;
 
@@ -249,7 +248,7 @@ where
 		let acc_str = signer.as_ref();
 		if acc_str.starts_with("0x") {
 			match acc_str.strip_prefix("0x") {
-				Some(hex_string) => TryInto::<[u8; 32]>::try_into(
+				Some(hex_string) => TryInto::<[u8; 20]>::try_into(
 					hex::decode(hex_string).map_err(|_| "Error decoding invalid hex string")?,
 				)
 				.map_err(|_| "Invalid account id hex string")
