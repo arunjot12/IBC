@@ -1,0 +1,97 @@
+[package]
+name = 'pallet-ibc'
+version = "4.0.0-dev"
+authors = ['Octopus Network <hi@oct.network>']
+edition = '2021'
+homepage = "https://oct.network"
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/octopus-network/substrate-ibc/"
+description = "An IBC implementation on Substrate."
+
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+
+log = { version = "0.4.0", default-features = false }
+serde = { version = "1.0", default-features = false }
+serde_json = { version = "1.0", default-features = false }
+
+# substate crates
+codec = { package = "parity-scale-codec", version = "3.6.1", default-features = false, features = [
+    "derive",
+] }
+scale-info = { version = "2.10.0", default-features = false, features = [
+    "derive",
+] }
+frame-benchmarking = { default-features = false, optional = true, git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+frame-support = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+frame-system = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-core = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-io = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-runtime = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-std = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-tracing = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+pallet-timestamp = {default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+
+## for ibc protocl
+pallet-ibc-utils = { version = "0.1.0", default-features = false, path = "../utils" }
+ibc = { version = "0.28.0", default-features = false, features = [
+    "parity-scale-codec",
+    "mocks-no-std",
+    "serde",
+], git = "https://github.com/octopus-network/ibc-rs.git", branch = "v0.28.0-codec-borsh-serde" }
+ibc-proto = { version = "0.25.0", default-features = false, features = [
+    "parity-scale-codec",
+], git = "https://github.com/octopus-network/ibc-proto-rs", branch = "ibc" }
+
+## optional
+pallet-balances = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0", optional = true }
+
+[dev-dependencies]
+chrono = "0.4.19"
+hex = '0.4.0'
+serde = "1.0"
+sha2 = '0.10.2'
+frame-support = {  git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+pallet-assets = {  git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+pallet-babe = {  git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+pallet-balances = {  git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+pallet-timestamp = {  git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-core = {  git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-io = {git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-keyring = {  git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-runtime = { git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-std = {  git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+sp-version = {  git = "https://github.com/paritytech/polkadot-sdk.git", branch =  "release-polkadot-v1.1.0" }
+
+[features]
+default = ['std']
+std = [
+    "codec/std",
+    "frame-benchmarking?/std",
+    "frame-support/std",
+    "frame-system/std",
+    "pallet-ibc-utils/std",
+    "scale-info/std",
+    "sp-core/std",
+    "sp-io/std",
+    "sp-runtime/std",
+    "sp-std/std",
+    "sp-tracing/std",
+    "ibc/std",
+    "ibc-proto/std",
+    "log/std",
+    "serde/std",
+    "serde_json/std",
+    "pallet-timestamp/std",
+]
+runtime-benchmarks = [
+    "frame-benchmarking/runtime-benchmarks",
+    "frame-system/runtime-benchmarks",
+    "pallet-timestamp/runtime-benchmarks",
+    "pallet-balances/runtime-benchmarks",
+]
+try-runtime = ["frame-support/try-runtime"]
